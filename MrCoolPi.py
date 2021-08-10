@@ -35,6 +35,15 @@ import mrcoolpi_fan as fans
 # import pifan_IR
 import mrcoolpi_temp as temp
 
+####################################################################
+FAN1_PULSE = 1       #NUM Pulses from fan per rev 
+FAN1_TACHO = 25 
+FAN1_LED = 3 
+FAN1_PWM = 15 
+FAN1_Hz = 20 
+FAN1_TYPE="4PIN"
+FAN1_NAME="EZDIY-FAB-1"
+FAN1_RELAY = 23
 #############################################################
 FAN2_PULSE = 1       #NUM Pulses from fan per rev 
 FAN2_TACHO = 2 
@@ -45,17 +54,8 @@ FAN2_TYPE="4PIN"
 FAN2_NAME="EZDIY-FAB-2"
 FAN2_RELAY= 24
 ####################################################################
-FAN1_PULSE = 1       #NUM Pulses from fan per rev 
-FAN1_TACHO = 18 
-FAN1_LED = 3 
-FAN1_PWM = 15 
-FAN1_Hz = 20 
-FAN1_TYPE="4PIN"
-FAN1_NAME="EZDIY-FAB-1"
-FAN1_RELAY = 23
-####################################################################
 FAN3_PULSE = 1       #NUM Pulses from fan per rev 
-FAN3_TACHO = 17 
+FAN3_TACHO = 18 
 FAN3_LED = 3 
 FAN3_PWM = 7 
 FAN3_Hz = 20 
@@ -64,7 +64,9 @@ FAN3_NAME="EZDIY-FAB-3"
 FAN3_RELAY = 27
 ####################################################################
 try:
-    print("Welcome to PiFan")
+    print("Welcome to Mr Cool Pi!")
+
+    #create fan objects - fans off at relay on init
     fan1 = fans.fan(FAN1_NAME,FAN1_TYPE,FAN1_LED,FAN1_TACHO,FAN1_PWM,FAN1_Hz,FAN1_PULSE,FAN1_RELAY)
     fan2 = fans.fan(FAN2_NAME,FAN2_TYPE,FAN2_LED,FAN2_TACHO,FAN2_PWM,FAN2_Hz,FAN2_PULSE,FAN2_RELAY)
     fan3 = fans.fan(FAN3_NAME,FAN3_TYPE,FAN3_LED,FAN3_TACHO,FAN3_PWM,FAN3_Hz,FAN3_PULSE,FAN3_RELAY)
@@ -74,29 +76,24 @@ try:
     while True:
         for fan in fan_bank:
             print(fan.name, fan.rpm, fan.last_rpm)
+            time.sleep(1)
             fan.pwr_on()
             fan.my_rpm() 
             if fan.rpm == fan.last_rpm: print("{} STALLED").format(fan.name)
-            time.sleep(3)
-            fan.pwr_off()
-            time.sleep(3)
-
+            print(fan.name, fan.rpm, fan.last_rpm)
             
-            """else:
-                print(x.name, x.rpm)
-                #x.control.start(10)
-                #print("STOPPING")
-                #x.control.start(0)
-                #time.sleep(10)
-                x.my_rpm()
-                print(x.name, x.rpm)
-                #time.sleep(2)
-                #print("STARTING")
-                x.control.start(100)
-                #time.sleep(10)
-                x.my_rpm()
-                print(x.name, x.rpm) """
+        time.sleep(5)
+        
+        for fan in fan_bank:
+            print(fan.name, fan.rpm, fan.last_rpm)
+            if fan.rpm == fan.last_rpm: print("{} STALLED").format(fan.name)
 
+        time.sleep(5)
+        for fan in fan_bank:
+            print(fan.name, fan.rpm, fan.last_rpm)
+            fan.pwr_off()
+
+        time.sleep(5)
 except KeyboardInterrupt: # trap a CTRL+C keyboard interrupt
     GPIO.cleanup() # resets all GPIO ports used by this function
 

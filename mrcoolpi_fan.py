@@ -24,7 +24,7 @@ def fell(n):
         return # Reject spuriously short pulses
     freq = 1 / dt
     tmp_rpm = (freq / tmp_pulse) * 60
-    print("{} TMP_RPM FELL").format(tmp_rpm)
+    #print("{} TMP_RPM FELL").format(tmp_rpm)
     t = time.time()
 
 def led_on(fan):
@@ -38,19 +38,30 @@ def led_off (fan):
 
 class fan:
     
+    def fell2(self):
+        global t
+        global tmp_rpm
+        #t = time.time()
+        dt = time.time() - t
+        if dt < 0.005: 
+            return # Reject spuriously short pulses
+        freq = 1 / dt
+        tmp_rpm = (freq / tmp_pulse) * 60
+        print("{} TMP_RPM FELL").format(tmp_rpm)
+        t = time.time()
+
     def my_rpm(self):
         global t 
         global tmp_rpm
+        GPIO.add_event_detect(self.tacho, GPIO.FALLING, fell)
         self.last_rpm = copy.copy(self.rpm)
-        #print("{} OLD RPM IN RPM").format(self.rpm)
         time.sleep(FAN_POLL_WAIT_TIME)
         self.rpm = tmp_rpm
-        #print("{} NEW RPM IN RPM").format(tmp_rpm)
         if tmp_rpm < min_rpm:
             led_off(self)
         else:
             led_on(self)    
-        #GPIO.remove_event_detect(self.tacho)
+        GPIO.remove_event_detect(self.tacho)
         return(self.rpm)
         
     def pwr_on(self):
@@ -75,9 +86,9 @@ class fan:
         tmp_pulse = pulse
 	GPIO.setup(led,GPIO.OUT) # FAN1_LED
         GPIO.setup(relay,GPIO.OUT)
-        GPIO.output(relay,GPIO.HIGH) # FAN ON!  RELAY
+        GPIO.output(relay,GPIO.LOW) # FAN OFF WHEN INIT
 	GPIO.setup(tacho, GPIO.IN, pull_up_down=GPIO.PUD_UP) # FAN1_TACHO PUP 3.3V
-        GPIO.add_event_detect(tacho, GPIO.FALLING, fell)
+        #GPIO.add_event_detect(tacho, GPIO.FALLING, fell)
 	self.rpm = tmp_rpm
         #print("{} RPM IN INIT").format(self.rpm)
         self.pwm = pwm
