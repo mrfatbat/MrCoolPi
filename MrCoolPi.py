@@ -1,5 +1,5 @@
 ##############################################
-#
+# MrCoolPi - 
 # PiFan - PWM fan xomtroller for RasPi
 # 
 # mrfatbat Jul 2021
@@ -17,7 +17,6 @@
 #   FUTURE - External temp #1 (my use for internal media centre)
 #   FUTURE - External temp #2 (my use for family room temp)
 #   FUTURE - IR Emiiter (my use for family room reverse cycle)
-# test edit
 # 
 #
 # DEV ROADMAP FOR CODE
@@ -32,9 +31,9 @@ import time
 import copy
 # import pifan_web as web
 # import pifan_pwm
-import pifan_fan as fans
+import mrcoolpi_fan as fans
 # import pifan_IR
-import pifan_tmp as temp
+import mrcoolpi_temp as temp
 
 #############################################################
 FAN2_PULSE = 1       #NUM Pulses from fan per rev 
@@ -70,12 +69,19 @@ try:
     fan2 = fans.fan(FAN2_NAME,FAN2_TYPE,FAN2_LED,FAN2_TACHO,FAN2_PWM,FAN2_Hz,FAN2_PULSE,FAN2_RELAY)
     fan3 = fans.fan(FAN3_NAME,FAN3_TYPE,FAN3_LED,FAN3_TACHO,FAN3_PWM,FAN3_Hz,FAN3_PULSE,FAN3_RELAY)
     fan_bank = [fan1,fan2,fan3] 
+    
+    #TESTING NONSENSE CONSTANT LOOP
     while True:
-        for x in fan_bank:
-            #time.sleep(2)
-            print(x.name, x.rpm, x.last_rpm)
-            x.my_rpm() 
-            if x.rpm == x.last_rpm: print("{} STALLED").format(x.name)
+        for fan in fan_bank:
+            print(fan.name, fan.rpm, fan.last_rpm)
+            fan.pwr_on()
+            fan.my_rpm() 
+            if fan.rpm == fan.last_rpm: print("{} STALLED").format(fan.name)
+            time.sleep(3)
+            fan.pwr_off()
+            time.sleep(3)
+
+            
             """else:
                 print(x.name, x.rpm)
                 #x.control.start(10)

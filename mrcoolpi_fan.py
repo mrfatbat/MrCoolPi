@@ -52,7 +52,12 @@ class fan:
             led_on(self)    
         #GPIO.remove_event_detect(self.tacho)
         return(self.rpm)
-    
+        
+    def pwr_on(self):
+        GPIO.output(self.relay,GPIO.HIGH) # FAN ON!  RELAY
+
+    def pwr_off(self):
+        GPIO.output(self.relay,GPIO.LOW) # FAN ON!  RELAY
 
     def __init__(self,name,fan_type,led,tacho,pwm,hz,pulse,relay):
 	global tmp_rpm 
