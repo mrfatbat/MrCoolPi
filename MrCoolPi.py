@@ -36,9 +36,11 @@ import mrcoolpi_fan as fans
 import mrcoolpi_temp as temp
 import mrcoolpi_io as io
 import mrcoolpi_relay as relay
+import mrcoolpi_cli as cli
+
 
 # Some inital comtrol/debug variables
-mrcoolpi_status "PROTO"
+mrcoolpi_status = "PROTO"
 
 
 # Initialise all the classes
