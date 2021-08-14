@@ -34,6 +34,18 @@ import copy
 import mrcoolpi_fan as fans
 # import pifan_IR
 import mrcoolpi_temp as temp
+import mrcoolpi_io as io
+import mrcoolpi_relay as relay
+
+# Some inital comtrol/debug variables
+mrcoolpi_status "PROTO"
+
+
+# Initialise all the classes
+
+# Initalise the MCP's 
+
+# Initialise the Serial Shifter
 
 ####################################################################
 FAN1_PULSE = 1       #NUM Pulses from fan per rev 
@@ -70,10 +82,15 @@ try:
     fan1 = fans.fan(FAN1_NAME,FAN1_TYPE,FAN1_LED,FAN1_TACHO,FAN1_PWM,FAN1_Hz,FAN1_PULSE,FAN1_RELAY)
     fan2 = fans.fan(FAN2_NAME,FAN2_TYPE,FAN2_LED,FAN2_TACHO,FAN2_PWM,FAN2_Hz,FAN2_PULSE,FAN2_RELAY)
     fan3 = fans.fan(FAN3_NAME,FAN3_TYPE,FAN3_LED,FAN3_TACHO,FAN3_PWM,FAN3_Hz,FAN3_PULSE,FAN3_RELAY)
+    
+    #create a list of all the fans
     fan_bank = [fan1,fan2,fan3] 
     
-    #TESTING NONSENSE CONSTANT LOOP
-    while True:
+    #TESTING During Protype
+
+
+
+   while True:
         for fan in fan_bank:
             print(fan.name, fan.rpm, fan.last_rpm)
             time.sleep(1)
