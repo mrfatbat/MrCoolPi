@@ -13,7 +13,7 @@
 #   WIP - Get CPU Temp
 #   FUTURE - Web Page / API
 #   WIP - Utilise PWM
-#   FUTURE - 12v Relay Control for fans
+#   WIP 12v Relay Control for fans - direct through Pi but need to kove over to shifter
 #   FUTURE - External temp #1 (my use for internal media centre)
 #   FUTURE - External temp #2 (my use for family room temp)
 #   FUTURE - IR Emiiter (my use for family room reverse cycle)
