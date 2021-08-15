@@ -6,13 +6,8 @@ from gpiozero import CPUTemperature
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(11,GPIO.OUT) #HEAT LED
-
-# HEAT MONITORING ##
-def led_tmp_hi_on():
-	print("TEMP HIGH")
-	GPIO.output(11, True)
 	
-def sen_tmp_raspi_cpu():
+def raspi_cpu_temp():
 	print("Obtaining RasPi CPU Temp....")
 	cpu = CPUTemperature()
 	print(cpu.temperature)
