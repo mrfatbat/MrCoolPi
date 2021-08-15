@@ -76,15 +76,15 @@ class fan:
         global tmp_pulse
         t = time.time()
         self.name = name
-	self.type = fan_type
-	self.led = led
-	self.pulse = pulse
-	self.tacho = tacho
+	      self.type = fan_type
+	      self.led = led
+	      self.pulse = pulse
+	      self.tacho = tacho
         self.relay = relay
         self.last_rpm = 0
         tmp_rpm = 0
         tmp_pulse = pulse
-	GPIO.setup(led,GPIO.OUT) # FAN1_LED
+	      GPIO.setup(led,GPIO.OUT) # FAN1_LED
         GPIO.setup(relay,GPIO.OUT)
         GPIO.output(relay,GPIO.LOW) # FAN OFF WHEN INIT
 	GPIO.setup(tacho, GPIO.IN, pull_up_down=GPIO.PUD_UP) # FAN1_TACHO PUP 3.3V
