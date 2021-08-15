@@ -87,9 +87,9 @@ class fan:
 	      GPIO.setup(led,GPIO.OUT) # FAN1_LED
         GPIO.setup(relay,GPIO.OUT)
         GPIO.output(relay,GPIO.LOW) # FAN OFF WHEN INIT
-	GPIO.setup(tacho, GPIO.IN, pull_up_down=GPIO.PUD_UP) # FAN1_TACHO PUP 3.3V
+	      GPIO.setup(tacho, GPIO.IN, pull_up_down=GPIO.PUD_UP) # FAN1_TACHO PUP 3.3V
         #GPIO.add_event_detect(tacho, GPIO.FALLING, fell)
-	self.rpm = tmp_rpm
+	      self.rpm = tmp_rpm
         #print("{} RPM IN INIT").format(self.rpm)
         self.pwm = pwm
         self.hz = hz
