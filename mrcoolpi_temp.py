@@ -12,8 +12,3 @@ def raspi_cpu_temp():
 	cpu = CPUTemperature()
 	print(cpu.temperature)
 
-
-def led_tmp_hi_off():
-	GPIO.output(11, False)
-
-###################
