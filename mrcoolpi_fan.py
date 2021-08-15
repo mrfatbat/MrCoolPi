@@ -71,7 +71,7 @@ class fan:
         GPIO.output(self.relay,GPIO.LOW) # FAN ON!  RELAY
 
     def __init__(self,name,fan_type,led,tacho,pwm,hz,pulse,relay):
-	global tmp_rpm 
+	      global tmp_rpm 
         global t
         global tmp_pulse
         t = time.time()
@@ -100,12 +100,5 @@ class fan:
     
 
 
-###################################################################################
-#tmp = GPIO.PWM(23,31.5)
-#while True:
-#    tmp.start(0)
-#    time.sleep(9)
-#    tmp.start(100)
-#    time.sleep(9)
 
 
