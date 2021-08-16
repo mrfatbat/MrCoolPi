@@ -37,6 +37,8 @@ import mrcoolpi_temp as temp
 import mrcoolpi_io as io
 import mrcoolpi_relay as relay
 import mrcoolpi_cli as cli
+import mrcoolpi_led as led
+import mrcoolpi_zone as zone
 
 
 # Some inital comtrol/debug variables
@@ -89,8 +91,6 @@ try:
     fan_bank = [fan1,fan2,fan3] 
     
     #TESTING During Protype
-
-
 
    while True:
         for fan in fan_bank:
