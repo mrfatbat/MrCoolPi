@@ -5,7 +5,7 @@
 # mrfatbat Jul 2021
 # mrfatbat@gmail.com
 # v0.0.1 210724
-# v0.0.2 210126 -- Some sort of fan stuff.... fan module getting there.
+# v0.0.2 210726 -- Some sort of fan stuff.... fan module getting there.
 #
 # DEV ROADMAP FOR FUNCTUONALITY
 #   BETA - Read tacho - getting weird values. works fine when PWM speed is set to zero, gives weird shit
