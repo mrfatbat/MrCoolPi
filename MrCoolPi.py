@@ -35,10 +35,11 @@ import mrcoolpi_fan as fans
 # import pifan_IR
 import mrcoolpi_temp as temp
 import mrcoolpi_io as io
-import mrcoolpi_relay as relay
-import mrcoolpi_cli as cli
-import mrcoolpi_led as led
-import mrcoolpi_zone as zone
+import mrcoolpi_shift as shift
+#import mrcoolpi_relay as relay
+#import mrcoolpi_cli as cli
+#import mrcoolpi_led as led
+#import mrcoolpi_zone as zone
 
 
 # Some inital comtrol/debug variables
@@ -82,37 +83,33 @@ FAN3_RELAY = 27
 try:
     print("Welcome to Mr Cool Pi!")
 
-    #create fan objects - fans off at relay on init
-    fan1 = fans.fan(FAN1_NAME,FAN1_TYPE,FAN1_LED,FAN1_TACHO,FAN1_PWM,FAN1_Hz,FAN1_PULSE,FAN1_RELAY)
-    fan2 = fans.fan(FAN2_NAME,FAN2_TYPE,FAN2_LED,FAN2_TACHO,FAN2_PWM,FAN2_Hz,FAN2_PULSE,FAN2_RELAY)
-    fan3 = fans.fan(FAN3_NAME,FAN3_TYPE,FAN3_LED,FAN3_TACHO,FAN3_PWM,FAN3_Hz,FAN3_PULSE,FAN3_RELAY)
-    
-    #create a list of all the fans
-    fan_bank = [fan1,fan2,fan3] 
-    
-    #TESTING During Protype
 
-   while True:
-        for fan in fan_bank:
-            print(fan.name, fan.rpm, fan.last_rpm)
-            time.sleep(1)
-            fan.pwr_on()
-            fan.my_rpm() 
-            if fan.rpm == fan.last_rpm: print("{} STALLED").format(fan.name)
-            print(fan.name, fan.rpm, fan.last_rpm)
-            
-        time.sleep(5)
-        
-        for fan in fan_bank:
-            print(fan.name, fan.rpm, fan.last_rpm)
-            if fan.rpm == fan.last_rpm: print("{} STALLED").format(fan.name)
 
-        time.sleep(5)
-        for fan in fan_bank:
-            print(fan.name, fan.rpm, fan.last_rpm)
-            fan.pwr_off()
+    # RELAY / SERIAL SHIFT TEST
+    tst_shift = shift.shift(9,22,10)
 
-        time.sleep(5)
+    tst_shift.set([1,0,0,0,0,0,0,0])
+    time.sleep(1)
+    tst_shift.set([0,1,0,0,0,0,0,0])
+    time.sleep(1)
+    tst_shift.set([0,0,1,0,0,0,0,0])
+    time.sleep(1)
+    tst_shift.set([0,0,0,1,0,0,0,0])
+    time.sleep(1)
+    tst_shift.set([0,0,0,0,1,0,0,0])
+    time.sleep(1)
+    tst_shift.set([0,0,0,0,0,1,0,0])
+    time.sleep(1)
+    tst_shift.set([0,0,0,0,0,0,1,0])
+    time.sleep(1)
+    tst_shift.set([0,0,0,0,0,0,0,1])
+    time.sleep(1)
+
+    tst_shift.set([1,1,1,1,1,1,1,1])
+    time.sleep(5)
+    tst_shift.set([0,0,0,0,0,0,0,0])
+
+
 except KeyboardInterrupt: # trap a CTRL+C keyboard interrupt
     GPIO.cleanup() # resets all GPIO ports used by this function
 

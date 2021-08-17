@@ -71,25 +71,25 @@ class fan:
         GPIO.output(self.relay,GPIO.LOW) # FAN ON!  RELAY
 
     def __init__(self,name,fan_type,led,tacho,pwm,hz,pulse,relay):
-	      global tmp_rpm 
+	global tmp_rpm 
         global t
         global tmp_pulse
         t = time.time()
         self.name = name
-	      self.type = fan_type
-	      self.led = led
-	      self.pulse = pulse
-	      self.tacho = tacho
+	self.type = fan_type
+	self.led = led
+	self.pulse = pulse
+	self.tacho = tacho
         self.relay = relay
         self.last_rpm = 0
         tmp_rpm = 0
         tmp_pulse = pulse
-	      GPIO.setup(led,GPIO.OUT) # FAN1_LED
+	GPIO.setup(led,GPIO.OUT) # FAN1_LED
         GPIO.setup(relay,GPIO.OUT)
         GPIO.output(relay,GPIO.LOW) # FAN OFF WHEN INIT
-	      GPIO.setup(tacho, GPIO.IN, pull_up_down=GPIO.PUD_UP) # FAN1_TACHO PUP 3.3V
+	GPIO.setup(tacho, GPIO.IN, pull_up_down=GPIO.PUD_UP) # FAN1_TACHO PUP 3.3V
         #GPIO.add_event_detect(tacho, GPIO.FALLING, fell)
-	      self.rpm = tmp_rpm
+	self.rpm = tmp_rpm
         #print("{} RPM IN INIT").format(self.rpm)
         self.pwm = pwm
         self.hz = hz
