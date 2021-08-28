@@ -88,6 +88,7 @@ try:
     # RELAY / SERIAL SHIFT TEST
     tst_shift = shift.shift(9,22,10)
 
+    print("TESTING RELAY THROUGH SHIFT")
     tst_shift.set([1,0,0,0,0,0,0,0])
     time.sleep(1)
     tst_shift.set([0,1,0,0,0,0,0,0])
